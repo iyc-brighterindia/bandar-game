@@ -243,7 +243,7 @@ h4{margin:16px 0 8px;font-size:13px;letter-spacing:.08em;color:#9FB7FF}
         <label class="name-field"><svg class="person" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4.2" fill="#0B1640"/><path d="M3.5 21c0-4.6 3.8-7.2 8.5-7.2s8.5 2.6 8.5 7.2z" fill="#0B1640"/></svg><input id="nameIn" maxlength="40" placeholder="Enter your name..." enterkeyhint="go" spellcheck="false" aria-label="Your name"></label>
         <label class="name-field mobile-field"><span class="cc"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" rx="2" fill="#fff"/><rect width="30" height="6.67" rx="2" fill="#FF9933"/><rect y="13.33" width="30" height="6.67" rx="2" fill="#138808"/><circle cx="15" cy="10" r="2.6" fill="none" stroke="#000080" stroke-width=".8"/></svg><b>+91</b></span><input id="mobileIn" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="14" placeholder="Mobile number (optional)" aria-label="Mobile number (optional)" aria-describedby="mobErr"></label>
         <div class="mob-err" id="mobErr" role="alert" aria-live="polite"></div>
-        <label class="consent"><input type="checkbox" id="consentIn"><span><span data-t="consentText">I'm 18+ and agree to share my name &amp; mobile with Indian Youth Congress (IYC) for updates via WhatsApp/SMS.</span> <a href="privacy.html" target="_blank" rel="noopener" id="privacyLink" data-t="privacyPolicy">Privacy Policy</a></span></label>
+        <label class="consent"><input type="checkbox" id="consentIn"><span><span data-t="consentText">I'm 18+ and agree to share my name &amp; mobile with Indian Youth Congress (IYC) for updates via WhatsApp/SMS.</span> <a href="https://bandar-register.iycsmapp.workers.dev/privacy.html" target="_blank" rel="noopener" id="privacyLink" data-t="privacyPolicy">Privacy Policy</a></span></label>
         <input type="text" id="hpIn" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
         <button id="goBtn" class="btn orange" type="submit" disabled><span data-t="challengeBandar">CHALLENGE BANDAR!</span> <span class="arrow">→</span></button>
       </form>
@@ -517,7 +517,7 @@ B.VOICE_DATA={"01":"SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE2LjEwMAAAAAAAAAAAAAAA
     // Change it here and rebuild (node tools/build.mjs) — every link and the certificate QR update together.
     GAME_URL: 'https://www.iyc.in/bandar',
     // Opt-in registrations go to the website's own server endpoint (relative to the game page), never to Google directly.
-    REGISTER_URL: 'api/register',
+    REGISTER_URL: 'https://bandar-register.iycsmapp.workers.dev/api/register',
     CONSENT_VERSION: 'BANDAR-CN-1.0',   // bump when the consent wording changes
     ORGANIZER: 'IYC · Digital Azaadi', // shown in footer/About — confirm before launch
     CONTACT: '',               // optional contact email/URL for About page
