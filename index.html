@@ -122,7 +122,7 @@ h4{margin:16px 0 8px;font-size:13px;letter-spacing:.08em;color:#9FB7FF}
 .intro-bottom{margin-top:auto}
 #landing>*{pointer-events:auto}
 .intro-logo{margin-top:-6px;pointer-events:none}
-.tap-cue{align-self:center;margin:0 auto 8px;width:max-content;pointer-events:none;font-size:12px;font-weight:800;letter-spacing:.02em;white-space:nowrap;padding:6px 12px;border-radius:99px;background:rgba(56,189,248,.16);border:1px solid rgba(56,189,248,.55);color:#E0F2FE;animation:cuePulse 1.6s ease-in-out infinite}
+.tap-cue{align-self:center;margin:0 auto;width:max-content;font-size:10.5px!important;padding:4px 9px!important;max-width:calc(100% - 172px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;letter-spacing:-.01em;pointer-events:none;font-size:12px;font-weight:800;letter-spacing:.02em;white-space:nowrap;padding:6px 12px;border-radius:99px;background:rgba(56,189,248,.16);border:1px solid rgba(56,189,248,.55);color:#E0F2FE;animation:cuePulse 1.6s ease-in-out infinite}
 .tap-cue.off{display:none}@keyframes cuePulse{50%{opacity:.55}}
 #appeal .mb-card,#appeal #appealSkip{transition:opacity .35s ease,transform .35s ease}
 #appeal.fading .mb-card,#appeal.fading #appealSkip{animation:fadeBack .4s ease forwards!important;pointer-events:none}
@@ -135,6 +135,18 @@ h4{margin:16px 0 8px;font-size:13px;letter-spacing:.08em;color:#9FB7FF}
 .name-field .person{width:28px;height:28px;flex:none;padding-right:10px;border-right:2px solid #C7CEE3}
 .name-field input{flex:1;min-width:0;border:0;background:transparent;outline:none;font:inherit;font-size:20px;font-weight:800;color:#0B1640;padding:10px 0}
 .name-field input::placeholder{color:#7A84A3;font-weight:700}
+/* data-capture fields (optional mobile + consent) */
+.mobile-field .cc{display:flex;align-items:center;gap:6px;flex:none;padding-right:10px;border-right:2px solid #C7CEE3;color:#0B1640;font-weight:900;font-size:17px}
+.mobile-field .flag{width:26px;height:17px;border-radius:2px;box-shadow:0 0 0 1px #d6dbe8}
+.mob-err{display:none;color:#FFB4B4;font-size:12.5px;font-weight:800;margin:-6px 6px 0}.mob-err.on{display:block}
+.consent{display:flex!important;flex-direction:row!important;align-items:flex-start!important;gap:10px!important;color:#EEF3FF;font-size:12px;line-height:1.35;font-weight:600;text-align:left;cursor:pointer;background:rgba(3,9,34,.86);border:1px solid rgba(120,160,255,.25);border-radius:14px;padding:9px 11px;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.consent input{appearance:none;-webkit-appearance:none;flex:none;width:22px;height:22px;margin:1px 0 0;border:2px solid #E5EDFF;border-radius:6px;background:rgba(255,255,255,.06);display:grid;place-items:center;cursor:pointer}
+.consent input:checked{background:#3B82F6;border-color:#93C5FD}.consent input:checked::after{content:'';width:6px;height:11px;border:solid #fff;border-width:0 3px 3px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.consent input:focus-visible{outline:2px solid #FFB020;outline-offset:2px}
+.consent a{color:#67E8F9;font-weight:800;text-decoration:underline}
+.hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;opacity:0}
+#namePanel{gap:8px}#namePanel .name-field input{font-size:18px;padding:6px 0}#namePanel .consent{font-size:11.5px;padding:7px 10px}
+@media (max-width:370px){#namePanel .name-field input{font-size:16.5px}}
 #welcomeChip{align-self:center;display:none;font-weight:900;font-style:italic;font-size:22px;color:#fff;background:rgba(3,8,32,.7);border:2px solid var(--org);border-radius:999px;padding:8px 18px;text-shadow:0 2px 6px #000}
 #welcomeChip.on{display:block;animation:rise .4s both}
 /* MetaBan appeal */
@@ -221,14 +233,18 @@ h4{margin:16px 0 8px;font-size:13px;letter-spacing:.08em;color:#9FB7FF}
   <section id="landing" class="screen">
     <div class="intro-top">
       <button class="pill" data-act="menuOpen" aria-label="Menu">☰ <span data-t="menu2">MENU</span></button>
+      <div id="tapCue" class="tap-cue" data-t="tapSound">🔊 Tap anywhere for sound</div>
       <button class="pill" id="skipBtn" data-act="skipIntro" data-t="skipIntro">SKIP</button>
     </div>
     <div class="intro-logo"><div class="bd-logo" role="heading" aria-level="1"><span class="w">Ban</span><span class="o">Dar!</span></div><div class="bd-sub" data-t="gameSub">THE CENSORSHIP GAME</div></div>
     <div class="intro-bottom">
-      <div id="tapCue" class="tap-cue" data-t="tapSound">🔊 Tap anywhere for sound</div>
       <div id="welcomeChip"></div>
       <form id="namePanel" autocomplete="off">
         <label class="name-field"><svg class="person" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4.2" fill="#0B1640"/><path d="M3.5 21c0-4.6 3.8-7.2 8.5-7.2s8.5 2.6 8.5 7.2z" fill="#0B1640"/></svg><input id="nameIn" maxlength="40" placeholder="Enter your name..." enterkeyhint="go" spellcheck="false" aria-label="Your name"></label>
+        <label class="name-field mobile-field"><span class="cc"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" rx="2" fill="#fff"/><rect width="30" height="6.67" rx="2" fill="#FF9933"/><rect y="13.33" width="30" height="6.67" rx="2" fill="#138808"/><circle cx="15" cy="10" r="2.6" fill="none" stroke="#000080" stroke-width=".8"/></svg><b>+91</b></span><input id="mobileIn" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="14" placeholder="Mobile number (optional)" aria-label="Mobile number (optional)" aria-describedby="mobErr"></label>
+        <div class="mob-err" id="mobErr" role="alert" aria-live="polite"></div>
+        <label class="consent"><input type="checkbox" id="consentIn"><span><span data-t="consentText">I'm 18+ and agree to share my name &amp; mobile with Indian Youth Congress (IYC) for updates via WhatsApp/SMS.</span> <a href="privacy.html" target="_blank" rel="noopener" id="privacyLink" data-t="privacyPolicy">Privacy Policy</a></span></label>
+        <input type="text" id="hpIn" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
         <button id="goBtn" class="btn orange" type="submit" disabled><span data-t="challengeBandar">CHALLENGE BANDAR!</span> <span class="arrow">→</span></button>
       </form>
       <div class="footer3"><b data-t="footerOrg">IYC · DIGITAL AZAADI</b><i></i><em data-t="footerSim">Fictional satirical game simulation</em></div>
@@ -500,6 +516,9 @@ B.VOICE_DATA={"01":"SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE2LjEwMAAAAAAAAAAAAAAA
     // ONE public URL for everything: certificate QR code, share messages, Challenge a Friend, Copy Link, Play links.
     // Change it here and rebuild (node tools/build.mjs) — every link and the certificate QR update together.
     GAME_URL: 'https://www.iyc.in/bandar',
+    // Opt-in registrations go to the website's own server endpoint (relative to the game page), never to Google directly.
+    REGISTER_URL: 'api/register',
+    CONSENT_VERSION: 'BANDAR-CN-1.0',   // bump when the consent wording changes
     ORGANIZER: 'IYC · Digital Azaadi', // shown in footer/About — confirm before launch
     CONTACT: '',               // optional contact email/URL for About page
     LAST_REVIEWED: '23 November 2026'
@@ -771,7 +790,7 @@ B.VOICE_DATA={"01":"SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE2LjEwMAAAAAAAAAAAAAAA
     xNote: 'X opens a pre-filled post. Images can’t be attached from a link — download the certificate first, then attach it to your post.',
     friendText: (n) => `${n} challenged BANDAR in BanDar! — a satirical game about online censorship. Let's challenge Bandar together.`,
     xText: (n) => `I challenged BanDar. My account became unavailable in India — in the game, of course. But my questions aren't going anywhere. Can you challenge Bandar too?`,
-    shareCert: '📤 SHARE CERTIFICATE', shareMain: 'SHARE MY CHALLENGE', sDownload: 'Download', sWhatsApp: 'WhatsApp', sX: 'X', sInstagram: 'Instagram', sFacebook: 'Facebook', sCopy: 'Copy link', sFriend: 'Challenge a friend', sEdit: 'Edit message', msgLabel: 'Your message (used for every share)', st_linkCopied: 'Game link copied.', st_shareCancel: '', st_waNote: 'WhatsApp opened with your message. Your certificate was saved — attach it to the chat.', st_igNote: 'Certificate saved and caption copied. In Instagram: + → Post or Story → pick the certificate, then paste the caption.', st_fbNote: 'Facebook opened with the game link. Your certificate was saved and the caption copied — attach the image and paste the caption.', st_xNote2: 'X opened with your message. X links can’t carry images — attach the certificate you just saved.', st_fallback: 'Certificate saved and message copied. Open WhatsApp, Instagram, X or Facebook, attach the image and paste the message.', st_inviteCopied: 'Invitation copied — send it to a friend.', st_shared: 'Shared from your device.', tapSound: '🔊 Tap anywhere for sound', viewCert: 'VIEW MY CERTIFICATE →', shareHelp: 'Share Certificate opens your phone’s share sheet (WhatsApp, Instagram, X…) where the browser supports image sharing. Otherwise the PNG is saved so you can attach it yourself. Nothing is ever posted for you.',
+    shareCert: '📤 SHARE CERTIFICATE', shareMain: 'SHARE MY CHALLENGE', sDownload: 'Download', sWhatsApp: 'WhatsApp', sX: 'X', sInstagram: 'Instagram', sFacebook: 'Facebook', sCopy: 'Copy link', sFriend: 'Challenge a friend', sEdit: 'Edit message', msgLabel: 'Your message (used for every share)', st_linkCopied: 'Game link copied.', st_shareCancel: '', st_waNote: 'WhatsApp opened with your message. Your certificate was saved — attach it to the chat.', st_igNote: 'Certificate saved and caption copied. In Instagram: + → Post or Story → pick the certificate, then paste the caption.', st_fbNote: 'Facebook opened with the game link. Your certificate was saved and the caption copied — attach the image and paste the caption.', st_xNote2: 'X opened with your message. X links can’t carry images — attach the certificate you just saved.', st_fallback: 'Certificate saved and message copied. Open WhatsApp, Instagram, X or Facebook, attach the image and paste the message.', st_inviteCopied: 'Invitation copied — send it to a friend.', st_shared: 'Shared from your device.', tapSound: '🔊 Tap anywhere for sound', mobilePh: 'Mobile number (optional)', mobileErr: 'Please enter a valid 10-digit Indian mobile number, or leave it blank.', consentText: "I'm 18+ and agree to share my name & mobile with Indian Youth Congress (IYC) for updates via WhatsApp/SMS.", privacyPolicy: 'Privacy Policy', viewCert: 'VIEW MY CERTIFICATE →', shareHelp: 'Share Certificate opens your phone’s share sheet (WhatsApp, Instagram, X…) where the browser supports image sharing. Otherwise the PNG is saved so you can attach it yourself. Nothing is ever posted for you.',
     viewerHelp: 'Downloads are blocked here. Long-press the image (phone) or right-click › Save image (computer) to keep your certificate.',
     st_dlOk: (f) => `Saved: ${f}`, st_dlStarted: (f) => `Download started: ${f}`, st_dlFail: 'Could not save the file here — showing the full image so you can save it manually.', st_dlDeclined: 'Save cancelled.',
     st_shared: 'Shared from your device.', st_noShare: 'This browser can’t share images directly — your certificate was saved. Open WhatsApp, Instagram or X and attach it.',
@@ -784,7 +803,7 @@ B.VOICE_DATA={"01":"SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE2LjEwMAAAAAAAAAAAAAAA
       title2: 'रिव्यू अनुरोध जमा हुआ', sub2: 'हम आपकी अपील देख रहे हैं। ज़्यादा समय नहीं लगेगा।',
       title3: 'रिव्यू पूरा', status3: 'फ़ैसला वही', quote3: "“We're scared of Mowgliji. We've got business to run.”", final3: 'अपील खारिज।', btn3: 'आवाज़ों से जुड़ें' },
     cert: Object.assign({}, V3_EN.cert, { reveal: (n) => `${n} ने बंदर को चैलेंज किया।` }),
-    dlCert: '⬇ सर्टिफ़िकेट डाउनलोड', shareX: '𝕏 X पर शेयर', challengeFriend: '↗ दोस्त को चैलेंज करें', shareCert: '📤 सर्टिफ़िकेट शेयर', shareMain: 'मेरा चैलेंज शेयर करें', sDownload: 'डाउनलोड', sCopy: 'लिंक कॉपी', sFriend: 'दोस्त को चैलेंज', sEdit: 'मैसेज बदलें', tapSound: '🔊 आवाज़ के लिए कहीं भी टैप करें', viewCert: 'मेरा सर्टिफ़िकेट देखें →',
+    dlCert: '⬇ सर्टिफ़िकेट डाउनलोड', shareX: '𝕏 X पर शेयर', challengeFriend: '↗ दोस्त को चैलेंज करें', shareCert: '📤 सर्टिफ़िकेट शेयर', shareMain: 'मेरा चैलेंज शेयर करें', sDownload: 'डाउनलोड', sCopy: 'लिंक कॉपी', sFriend: 'दोस्त को चैलेंज', sEdit: 'मैसेज बदलें', tapSound: '🔊 आवाज़ के लिए कहीं भी टैप करें', mobilePh: 'मोबाइल नंबर (वैकल्पिक)', mobileErr: 'कृपया 10 अंकों का सही भारतीय मोबाइल नंबर डालें, या इसे खाली छोड़ दें।', viewCert: 'मेरा सर्टिफ़िकेट देखें →',
     xNote: 'X पर पहले से लिखा पोस्ट खुलेगा। लिंक से इमेज नहीं जुड़ती — पहले सर्टिफ़िकेट डाउनलोड करें, फिर पोस्ट में जोड़ें।'
   });
   Object.assign(EN, V3_EN); Object.assign(HI, V3_HI);
@@ -5571,9 +5590,14 @@ module.exports = QRCode;
     $('#shareMsg').addEventListener('input', () => { UI.msgEdited = true; updateXCount(); });
     const nameIn = $('#nameIn');
     nameIn.addEventListener('input', () => { $('#goBtn').disabled = !P.clean(nameIn.value); });
+    $('#mobileIn').addEventListener('input', () => { $('#mobErr').classList.remove('on'); });
     $('#namePanel').addEventListener('submit', (e) => {
       e.preventDefault(); A.init();
+      const mobRaw = $('#mobileIn').value, mob = UI.normMobile(mobRaw);
+      if (mobRaw.trim() && !mob) { const er = $('#mobErr'); er.textContent = L().mobileErr; er.classList.add('on'); shake('#mobileIn'); return; }
       if (!P.set(nameIn.value)) { shake('#nameIn'); return; }
+      if (mob && $('#consentIn').checked) UI.register({ name: P.name, mobile: mob, consent: true, consentVersion: B.CONFIG.CONSENT_VERSION, hp: $('#hpIn').value, elapsed: Date.now() - (UI.formShownAt || 0) });
+      $('#mobileIn').value = ''; $('#consentIn').checked = false;   // the number is never kept in the page or in storage
       $('#namePanel').classList.remove('on'); $('#skipBtn').style.visibility = 'hidden';
       const chip = $('#welcomeChip'); chip.textContent = L().welcome(P.display(18)); chip.classList.add('on');
       nameIn.blur(); B.cine.introName(P.name);
@@ -5586,7 +5610,7 @@ module.exports = QRCode;
     // First interaction anywhere unlocks audio and starts Bandar's opening line (iOS needs touchend/click too).
     const unlock = () => {
       A.init(); if (A.voice) A.voice.load();
-      if (!UI.unlocked) { UI.unlocked = true; $('#tapCue').classList.add('off'); if (B.cine.introUnlock) B.cine.introUnlock(); }
+      if (!UI.unlocked) { UI.unlocked = true; $('#tapCue').classList.add('off'); UI.measureLogo(); if (B.cine.introUnlock) B.cine.introUnlock(); }
       if (A.ctx && A.ctx.state === 'running') ['pointerdown', 'touchend', 'click', 'keydown'].forEach(ev => document.removeEventListener(ev, unlock, true));
     };
     ['pointerdown', 'touchend', 'click', 'keydown'].forEach(ev => document.addEventListener(ev, unlock, true));
@@ -5600,7 +5624,7 @@ module.exports = QRCode;
     const l = L();
     document.querySelectorAll('[data-t]').forEach(el => { const k = el.dataset.t; if (typeof l[k] === 'string') el.textContent = l[k]; });
     document.querySelectorAll('[data-t3]').forEach(el => { const k = el.dataset.t3; if (l.review && typeof l.review[k] === 'string') el.textContent = l.review[k]; });
-    $('#nameIn').placeholder = l.enterName;
+    $('#nameIn').placeholder = l.enterName; $('#mobileIn').placeholder = l.mobilePh;
     $('#btnMute').textContent = A.muted ? '🔇' : '🔊'; $('#btnMute').setAttribute('aria-label', A.muted ? 'Unmute' : 'Mute');
     document.querySelectorAll('.st-sound').forEach(el => el.textContent = (A.muted ? '🔇 ' : '🔊 ') + l.sound);
     document.querySelectorAll('.st-voice').forEach(el => el.style.display = 'none');
@@ -5628,7 +5652,20 @@ module.exports = QRCode;
   window.addEventListener('resize', () => setTimeout(() => UI.measureLogo(), 60));
   UI.showNamePrompt = function () {
     const p = $('#namePanel'), i = $('#nameIn'); if (p.classList.contains('on')) return;
-    p.classList.add('on'); i.value = P.name || ''; $('#goBtn').disabled = !P.clean(i.value);
+    p.classList.add('on'); i.value = P.name || ''; $('#goBtn').disabled = !P.clean(i.value); UI.formShownAt = Date.now();
+  };
+  // ---------- Optional, consented registration (fire-and-forget; the game never waits for it) ----------
+  UI.normMobile = function (v) {
+    let d = String(v || '').replace(/\D/g, '');
+    if (d.length === 12 && d.startsWith('91')) d = d.slice(2); else if (d.length === 11 && d.startsWith('0')) d = d.slice(1);
+    return /^[6-9]\d{9}$/.test(d) ? d : null;
+  };
+  UI.register = function (data) {
+    try {
+      const url = B.CONFIG.REGISTER_URL; if (!url || !/^https?:$/.test(location.protocol)) return;
+      const ctl = window.AbortController ? new AbortController() : null; if (ctl) setTimeout(() => ctl.abort(), 8000);
+      fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data), credentials: 'same-origin', keepalive: true, cache: 'no-store', signal: ctl ? ctl.signal : undefined }).catch(() => { });
+    } catch (e) { }
   };
   UI.introDone = function () { UI.play('story'); };
   UI.victoryShown = function () { UI.showTapButton(false); UI.tapOn = true; $('#viewCert').classList.add('on'); };
